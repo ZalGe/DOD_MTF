@@ -5,6 +5,7 @@ from Functionality.pause_menu import PauseMenu
 from Functionality.timer import Timer, pygame
 from Games.pong import play_pong
 from Games.flappy import play_flappy
+from Games.dino_chrome import play_dino_chrome
 
 
 pygame.init()
@@ -38,6 +39,9 @@ def game_start(gs: GetSetGame, p: PauseMenu, t: Timer):
         print("play")
         play_flappy(start_menu, p, t)
 
+    elif gs.get_game() == 3:
+        play_dino_chrome(start_menu, p, t)
+
 
 def start_menu():
     surface = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
@@ -52,7 +56,7 @@ def start_menu():
     menu = pygame_menu.Menu('Welcome to MTF STU', Width, Height, theme=pygame_menu.themes.THEME_DARK)
     gs.set_game(1)
 
-    menu.add.selector('Select Game :', [('Pong', 1), ('Flappy Bird', 2)],
+    menu.add.selector('Select Game :', [('Pong', 1), ('Flappy Bird', 2), ('Chrome Dinosaur', 3)],
                       onchange=lambda selected, value: game_choice(selected, value, gs))
     menu.add.button('Play', lambda: game_start(gs, p, t))
     menu.add.button('Leaderboard')
