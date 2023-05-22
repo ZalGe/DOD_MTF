@@ -1,9 +1,13 @@
+import pygame
 import pygame_menu
 from typing import Tuple, Any
 from Functionality.pause_menu import PauseMenu
 from Functionality.timer import Timer, pygame
 from Games.pong import play_pong
 from Games.flappy import play_flappy
+
+
+pygame.init()
 
 
 class GetSetGame:
@@ -32,7 +36,7 @@ def game_start(gs: GetSetGame, p: PauseMenu, t: Timer):
 
     elif gs.get_game() == 2:
         print("play")
-        play_flappy()
+        play_flappy(start_menu, p, t)
 
 
 def start_menu():
