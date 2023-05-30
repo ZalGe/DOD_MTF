@@ -1,8 +1,10 @@
 import pygame
-from Games import p, t, start_menu
 
+from Functionality.timer import Timer
 
 pygame.init()
+
+t = Timer
 
 # Font that is used to render the text
 font20 = pygame.font.Font('freesansbold.ttf', 20)
@@ -118,7 +120,7 @@ class Ball:
         return self.ball
 
 
-def show_winner(p1_score, p2_score):
+def show_winner(p1_score, p2_score, t):
     if p1_score == 10 or p2_score == 10:
         winner = ""
         font20v2 = pygame.font.Font('freesansbold.ttf', 30)
@@ -132,12 +134,12 @@ def show_winner(p1_score, p2_score):
 
         label1 = font20v2.render(f"Winner is {winner}", True, WHITE)
         label2 = font20v2.render("Press SPACE to play again!", True, WHITE)
-        label3 = font20v2.render("Press M to return to main menu!", True, WHITE)
+        # label3 = font20v2.render("Press M to return to main menu!", True, WHITE)
         label4 = font20v2.render("Press Q to quit!", True, WHITE)
 
         screen.blit(label1, (WIDTH / 2 - label1.get_width() / 2, HEIGHT / 2 - label1.get_height()))
         screen.blit(label2, (WIDTH / 2 - label2.get_width() / 2, HEIGHT / 2 + label2.get_height()))
-        screen.blit(label3, (WIDTH / 2 - label3.get_width() / 2, HEIGHT / 2 + 2 * label3.get_height() + 10))
+        # screen.blit(label3, (WIDTH / 2 - label3.get_width() / 2, HEIGHT / 2 + 2 * label3.get_height() + 10))
         screen.blit(label4, (WIDTH / 2 - label4.get_width() / 2, HEIGHT / 2 + 3 * label4.get_height() + 20))
 
         pygame.display.flip()
@@ -153,8 +155,8 @@ def show_winner(p1_score, p2_score):
                         play_pong()
                     if event.key == pygame.K_q:
                         raise SystemExit
-                    if event.key == pygame.K_m:
-                        start_menu()
+                    # if event.key == pygame.K_m:
+                    #     start_menu()
 
 
 # Game Manager
@@ -189,8 +191,8 @@ def play_pong():
                     player1_y_fac = -1
                 if event.key == pygame.K_s:
                     player1_y_fac = 1
-                if event.key == pygame.K_p:
-                    p.pause(start_menu, t)
+                # if event.key == pygame.K_p:
+                #     p.pause(start_menu, t)
             if event.type == pygame.KEYUP:
                 if event.key in (pygame.K_UP, pygame.K_DOWN):
                     player2_y_fac = 0
@@ -215,7 +217,7 @@ def play_pong():
         elif point == 1:
             player2_score += 1
 
-        show_winner(player1_score, player2_score)
+        show_winner(player1_score, player2_score, t)
 
         # Someone has scored
         # a point and the ball is out of bounds.
@@ -236,3 +238,6 @@ def play_pong():
 
         pygame.display.update()
         clock.tick(FPS)
+
+
+play_pong()

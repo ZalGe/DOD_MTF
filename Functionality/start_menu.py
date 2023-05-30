@@ -1,9 +1,13 @@
 import pygame
 import pygame_menu
+import os
 from typing import Tuple, Any
+
+
 from Functionality.pause_menu import PauseMenu
-from Functionality.timer import Timer, pygame
-from Games.pong import play_pong
+from Functionality.timer import Timer
+
+
 from Games.flappy import play_flappy
 from Games.dino_chrome import play_dino_chrome
 
@@ -33,7 +37,7 @@ def game_choice(selected: Tuple, value: Any, gs_game: GetSetGame):
 def game_start(gs: GetSetGame, p: PauseMenu, t: Timer):
     if gs.get_game() == 1:
         print("play")
-        play_pong(start_menu, p, t)
+        os.system('python Games/pong.py')
 
     elif gs.get_game() == 2:
         print("play")
